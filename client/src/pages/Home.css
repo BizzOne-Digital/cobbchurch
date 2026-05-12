@@ -989,3 +989,53 @@
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 768px) {
+
+  .who-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .who-content {
+    display: contents;
+  }
+
+  .section-label {
+    order: 1;
+    padding: 0 24px;
+    margin-top: 40px;
+  }
+
+  .who-content .section-title {
+    order: 2;
+    padding: 0 24px;
+  }
+
+  .who-image {
+    order: 3;
+    margin-top: 24px;
+  }
+
+  .who-content .divider {
+    order: 4;
+    margin: 24px 24px;
+  }
+
+  .who-content p:nth-of-type(1) {
+    order: 5;
+    padding: 0 24px;
+  }
+
+  .who-content p:nth-of-type(2) {
+    order: 6;
+    padding: 0 24px;
+  }
+
+  .who-content .btn {
+    order: 7;
+    margin: 24px;
+    width: fit-content;
+  }
+
+}
