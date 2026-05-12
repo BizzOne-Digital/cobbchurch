@@ -199,11 +199,7 @@ const Home = () => {
   alt={t.author}
   className="pastor-video-thumb"
 />
-                  <div className="pastor-video-overlay">
-                    <div className="pastor-play-btn">
-                      <FiPlay size={18} />
-                    </div>
-                  </div>
+                 
                   <div className="pastor-video-info">
                     <strong>{t.author}</strong>
                     <span>{t.subtitle}</span>
