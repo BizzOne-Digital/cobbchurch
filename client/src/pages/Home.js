@@ -129,12 +129,7 @@ const Home = () => {
     className="who-img"
   />
 
-  <div className="play-overlay">
-    <div className="play-btn">
-      <FiPlay size={26} />
-    </div>
-    <span>Watch Our Story</span>
-  </div>
+  
 </div>
           <div className="who-content">
             <span className="section-label">Who We Are</span>
