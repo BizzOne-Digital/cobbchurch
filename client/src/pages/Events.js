@@ -30,7 +30,7 @@ const Events = () => {
           <span className="section-label">Building Relationships Through Connection</span>
           <h2 className="section-title">Building Relationships Through Consistent Connection</h2>
           <div className="divider divider-center"></div>
-          <p className="section-subtitle">Healthy collaboration starts with healthy relationships. Our gatherings help pastors and ministry leaders build meaningful relationships, share ideas and resources, pray together, collaborate on outreach, and strengthen unity throughout Cobb County.</p>
+          <p className="section-subtitle">Healthy collaboration starts with healthy relationships.<br /> Our gatherings help pastors and ministry leaders <br />Build meaningful relationships,<br /> Share ideas and resources, <br />Pray together, <br />Collaborate on outreach, and <br />Strengthen unity throughout Cobb County.</p>
         </div>
       </section>
 
