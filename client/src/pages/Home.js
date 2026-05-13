@@ -217,11 +217,7 @@ const Home = () => {
               serve the community with greater unity.
             </p>
 
-            <p>
-              Whether through outreach initiatives, crisis response,
-              leadership gatherings, or shared resources, the goal is simple:
-              stronger churches working together for greater Kingdom impact.
-            </p>
+          
 
             <Link
               to="/about"

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 import api from '../utils/api';
-
+import './Contact.css';
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const Contact = () => {
 
       <section className="section">
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1.6fr',gap:'60px',alignItems:'start'}}>
+          <div className="contact-grid">
             <div>
               <h2 className="section-title">Get in Touch</h2>
               <div className="divider"></div>

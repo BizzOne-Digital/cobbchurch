@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiHeart, FiUsers, FiZap, FiTarget } from 'react-icons/fi';
+import './About.css';
 
 const About = () => {
   const values = [
@@ -22,7 +23,7 @@ const About = () => {
       {/* Mission */}
       <section className="section">
         <div className="container">
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'80px',alignItems:'center'}}>
+          <div className="mission-vision-grid">
             <div>
               <span className="section-label">Our Mission</span>
               <h2 className="section-title">Our Mission</h2>
