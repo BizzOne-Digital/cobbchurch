@@ -66,35 +66,34 @@ const Home = () => {
 </div>
 
             <p className="hero-eyebrow">
-              An initiative of Cobb Pastors Alliance •{' '}
-              <span>Powered by The Shepherds Table</span>
+              Powered by the Pastors Alliance •{' '}
+              <span>Initiative of the Shepherd's Table</span>
             </p>
 
             <h1 className="hero-title">
-              Connecting Churches.
-              <span className="text-gold">Strengthening Community.</span>
+              Stronger Churches.
+              <span className="text-gold">Stronger Community.</span>
             </h1>
 
             <div className="hero-divider" />
 
             <p className="hero-subtitle">
-              What could God do in our community if we truly moved together?
+              A private network helping pastors and churches across Cobb County connect, collaborate, share resources, and respond together?
             </p>
 
             <p className="hero-description">
-              A place where pastors and churches unite to share resources,
-              serve together, and strengthen our community.
+              Cobb Church Network exists to help churches move from isolation to collaboration — building stronger relationships, stronger outreach, and stronger impact throughout our community.
             </p>
 
             <div className="hero-actions">
               <Link to="/request-access" className="btn btn-primary btn-lg">
-                <FiUsers /> Join the Network
+                <FiUsers /> Request Access
               </Link>
               <Link to="/resources" className="btn btn-secondary btn-lg">
-                <FiPackage /> Explore Resources
+                <FiPackage /> Watch Our Story
               </Link>
               <Link to="/pastor-stories" className="btn btn-outline-light btn-lg">
-                <FiPlay /> Hear from Pastors
+                <FiPlay /> Explore the Vision
               </Link>
             </div>
 
@@ -139,12 +138,12 @@ const Home = () => {
             </h2>
             <div className="divider" />
             <p>
-              The Cobb Church Network is a movement of pastors and churches committed
-              to unity, collaboration, and lasting community impact.
+              Cobb Church Network brings pastors, churches, and ministry leaders together through collaboration, communication, and community impact
             </p>
             <p>
-              When churches move together, we can reach further, serve better,
-              and change more lives for the Kingdom.
+              The network exists to strengthen relationships between churches so they can work together more effectively, support one another, and serve the community with greater unity.
+
+Whether through outreach initiatives, crisis response, leadership gatherings, or shared resources, the goal is simple:.
             </p>
             <Link to="/about" className="btn btn-navy" style={{ marginTop: '28px', alignSelf: 'flex-start' }}>
               Learn More About Us <FiArrowRight />
