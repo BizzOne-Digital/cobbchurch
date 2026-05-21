@@ -19,7 +19,7 @@ app.use(cors({
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 100
 });
 
@@ -56,20 +56,27 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/donate', require('./routes/donate'));
 app.use('/api/admin', require('./routes/admin'));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log('✅ MongoDB connected');
+// MongoDB Connection — Vercel serverless fix
+let isConnected = false;
 
-  // Seed admin user on first run
-  require('./utils/seedAdmin');
-})
-.catch((err) => {
-  console.error('MongoDB connection error:', err);
-});
+const connectDB = async () => {
+  if (isConnected) return;
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 10000,
+    });
+    isConnected = true;
+    console.log('✅ MongoDB connected');
+    require('./utils/seedAdmin');
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+  }
+};
+
+connectDB();
 
 // Mongo Events
 mongoose.connection.on('connected', () => {
@@ -78,13 +85,6 @@ mongoose.connection.on('connected', () => {
 
 mongoose.connection.on('error', (err) => {
   console.log('MongoDB Error:', err);
-});
-
-// Server
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
 });
 
 module.exports = app;
