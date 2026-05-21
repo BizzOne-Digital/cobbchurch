@@ -36,9 +36,8 @@ const Footer = () => {
             <p className="footer-powered">An Initiative of Cobb Pastors Alliance • Powered by The Shepherd's Table.</p>
 
             <div className="footer-social">
-              <a href="#" aria-label="Facebook"><FiFacebook /></a>
-              <a href="#" aria-label="Instagram"><FiInstagram /></a>
-              <a href="#" aria-label="Twitter"><FiTwitter /></a>
+              <a href="https://www.facebook.com/profile.php?id=61588685120674" aria-label="Facebook"><FiFacebook /></a>
+              
               <a href="mailto:info@cobbchurchnetwork.org" aria-label="Email"><FiMail /></a>
             </div>
           </div>
