@@ -56,7 +56,7 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/donate', require('./routes/donate'));
 app.use('/api/admin', require('./routes/admin'));
 
-// MongoDB Connection — Vercel serverless fix
+// MongoDB Connection
 let isConnected = false;
 
 const connectDB = async () => {
@@ -65,7 +65,6 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      bufferCommands: false,
       serverSelectionTimeoutMS: 10000,
     });
     isConnected = true;
