@@ -99,21 +99,21 @@ const Home = () => {
 
       {/* ───────── HERO ───────── */}
       {/* PDF: Updated all hero text, buttons renamed, added "We're Better Together" */}
-      <section
-        className="hero home-hero"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
-      >
+     <section
+  className="hero home-hero"
+  style={{ 
+    backgroundImage: window.innerWidth <= 768 
+      ? "url('/images/uphero-mobile.jpeg')" 
+      : "url('/images/uphero.jpeg')" 
+  }}
+>
         <div className="hero-overlay" />
 
         <div className="container hero-content">
           <div className="hero-inner">
 
-            <div className="logo-icon">
-              <img
-                src="/images/logo.png"
-                alt="Cobb Church Network Logo"
-                className="logo-img"
-              />
+            <div className="logo-icon" className="logo-img">
+              
             </div>
 
             {/* PDF: "An Initiative of Cobb Pastors Alliance • Powered by The Shepherds Table" */}
@@ -196,7 +196,7 @@ const Home = () => {
 
           <div className="who-image">
             <img
-              src="/images/why.png"
+              src="/images/group.jpeg"
               alt="Cobb Church Network"
               className="who-img"
             />
@@ -265,43 +265,46 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ───────── PASTOR STORIES ───────── */}
-      {/* PDF: Video section replaced with image (men+women) until video is ready */}
+       {/* ── PASTOR STORIES ───────────────────────────── */}
       <section className="section pastor-stories-section">
         <div className="container">
-
           <div className="pastor-stories-header">
-
             <div className="pastor-intro-text">
               <span className="section-label">Hear from Pastors</span>
               <h2 className="section-title" style={{ fontSize: '1.9rem' }}>
-                Real Stories.
-                <br />
-                Real Impact.
+                Real Stories.<br />Real Impact.
               </h2>
               <div className="divider" />
               <p>
-                Real stories from pastors who are experiencing the
-                power of unity and collaboration.
+                Real stories from pastors who are experiencing the power of
+                unity and collaboration.
               </p>
               <Link to="/pastor-stories" className="btn btn-primary" style={{ marginTop: '8px' }}>
                 Watch More Stories
               </Link>
             </div>
 
-            {/* PDF: Replace group-of-men video/image with men+women image */}
-            <div className="pastor-video-replacement">
-              <img
-                src="/images/community-group.jpeg"
-                alt="Diverse group of pastors and community leaders"
-                className="pastor-replacement-img"
-              />
+            <div className="pastor-videos-grid">
+              {testimonials.map((t, i) => (
+                <div key={i} className="pastor-video-card">
+                  {/* Replace src with real thumbnail if available */}
+                  <img
+  src={`/images/pastor-${i + 1}.png`}
+  alt={t.author}
+  className="pastor-video-thumb"
+/>
+                 
+                  <div className="pastor-video-info">
+                    <strong>{t.author}</strong>
+                    <span>{t.subtitle}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-
           </div>
-
         </div>
       </section>
+
 
       {/* ───────── VISION ───────── */}
       <section className="section vision-section">
@@ -373,13 +376,13 @@ const Home = () => {
               </div>
 
               <div className="grid-4">
-                {stats.map((s, i) => (
-                  <div key={i} className="stat-item">
-                    <span className="stat-number">{s.number}</span>
-                    <span className="stat-label">{s.label}</span>
-                  </div>
-                ))}
-              </div>
+  {stats.map((s, i) => (
+    <div key={i} className="vision-card">
+      <span className="vision-number">{s.number}</span>
+      <span className="vision-label">{s.label}</span>
+    </div>
+  ))}
+</div>
 
             </div>
           </div>

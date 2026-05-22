@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiHeart, FiCheck, FiCreditCard, FiDollarSign, FiMail } from 'react-icons/fi';
+import { FiHeart, FiCreditCard, FiDollarSign, FiMail } from 'react-icons/fi';
 import './Donate.css';
 
 const amounts = [25, 50, 100, 250, 500, 1000];
@@ -15,17 +14,20 @@ const impacts = [
 ];
 
 const Donate = () => {
-  const [selected, setSelected]     = useState(100);
-  const [custom, setCustom]         = useState('');
-  const [method, setMethod]         = useState('card');
-  const [frequency, setFrequency]   = useState('one-time');
+  const [selected, setSelected]   = useState(100);
+  const [custom, setCustom]       = useState('');
+  const [method, setMethod]       = useState('card');
+  const [frequency, setFrequency] = useState('one-time');
 
   const finalAmount = custom || selected || 0;
+
+  const paypalLabel = 'Donate $' + finalAmount + ' via PayPal';
+  const cardLabel   = 'Donate $' + finalAmount + ' — Coming Soon';
 
   return (
     <div>
 
-      {/* ── HERO ── */}
+      {/* HERO */}
       <section className="page-hero">
         <div className="container">
           <h1>Support the Mission</h1>
@@ -33,12 +35,12 @@ const Donate = () => {
         </div>
       </section>
 
-      {/* ── MAIN SECTION ── */}
+      {/* MAIN */}
       <section className="section">
         <div className="container">
           <div className="donate-layout">
 
-            {/* ── LEFT: WHY GIVE ── */}
+            {/* LEFT */}
             <div className="donate-left">
               <span className="section-label">Why Give</span>
               <h2 className="section-title">Why Your Support Matters</h2>
@@ -66,7 +68,7 @@ const Donate = () => {
               </div>
             </div>
 
-            {/* ── RIGHT: DONATION FORM ── */}
+            {/* RIGHT */}
             <div className="donate-form-card">
 
               <h3 className="donate-form-title">Make a Donation</h3>
@@ -78,10 +80,10 @@ const Donate = () => {
                   <button
                     key={a}
                     onClick={() => { setSelected(a); setCustom(''); }}
-                    className={`btn ${selected === a && !custom ? 'btn-primary' : 'btn-outline'}`}
+                    className={'btn ' + (selected === a && !custom ? 'btn-primary' : 'btn-outline')}
                     style={{ justifyContent: 'center' }}
                   >
-                    ${a}
+                    {'$' + a}
                   </button>
                 ))}
               </div>
@@ -120,109 +122,87 @@ const Donate = () => {
               {/* Amount display */}
               <div className="amount-display">
                 <span>Donation Amount:</span>
-                <span className="amount-value">${finalAmount}</span>
+                <span className="amount-value">{'$' + finalAmount}</span>
               </div>
 
-              {/* ── PAYMENT METHOD TABS ── */}
+              {/* Payment Method Tabs */}
               <div className="method-label">Select Payment Method</div>
               <div className="method-tabs">
                 <button
-                  className={`method-tab ${method === 'card' ? 'active' : ''}`}
+                  className={'method-tab ' + (method === 'card' ? 'active' : '')}
                   onClick={() => setMethod('card')}
                 >
                   <FiCreditCard /> Card
                 </button>
                 <button
-                  className={`method-tab ${method === 'paypal' ? 'active' : ''}`}
+                  className={'method-tab ' + (method === 'paypal' ? 'active' : '')}
                   onClick={() => setMethod('paypal')}
                 >
-                  💳 PayPal
+                  PayPal
                 </button>
                 <button
-                  className={`method-tab ${method === 'ach' ? 'active' : ''}`}
+                  className={'method-tab ' + (method === 'ach' ? 'active' : '')}
                   onClick={() => setMethod('ach')}
                 >
                   <FiDollarSign /> Bank / ACH
                 </button>
                 <button
-                  className={`method-tab ${method === 'check' ? 'active' : ''}`}
+                  className={'method-tab ' + (method === 'check' ? 'active' : '')}
                   onClick={() => setMethod('check')}
                 >
                   <FiMail /> Check
                 </button>
               </div>
 
-              {/* ── CARD ── */}
+              {/* CARD */}
               {method === 'card' && (
                 <div className="method-panel">
                   <div className="method-notice info">
                     <FiCreditCard />
                     <div>
                       <strong>Debit / Credit Card</strong>
-                      <p>
-                        To accept card payments, connect a <strong>Stripe</strong> account
-                        (stripe.com). Once connected, replace this panel with the Stripe
-                        Elements component or Stripe Payment Link.
-                      </p>
+                      <p>Card payments coming soon. Please use PayPal or another method.</p>
                     </div>
                   </div>
                   <button className="btn btn-primary btn-lg donate-btn" disabled>
-                    <FiHeart /> Donate ${finalAmount} — Coming Soon
+                    {cardLabel}
                   </button>
                 </div>
               )}
 
-              {/* ── PAYPAL ── */}
+              {/* PAYPAL */}
               {method === 'paypal' && (
                 <div className="method-panel">
                   <div className="method-notice info">
                     <span style={{ fontSize: '1.4rem' }}>💳</span>
                     <div>
                       <strong>PayPal</strong>
-                      <p>
-                        To accept PayPal donations, go to <strong>paypal.com/donate</strong>,
-                        create a Donate button, and paste your PayPal Hosted Button ID or
-                        PayPal.Me link below in the code. You can also use PayPal's
-                        JavaScript SDK for a seamless in-page experience.
-                      </p>
+                      <p>You will be redirected to PayPal to complete your donation securely.</p>
                     </div>
                   </div>
-                  {/* TODO: Replace href with your PayPal.Me or Donate link */}
                   <a
-                    href="https://www.paypal.com/donate"
+                    href="https://www.paypal.com/donate/?hosted_button_id=JKHEF75SXWMV8"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary btn-lg donate-btn"
                   >
-                    <FiHeart /> Continue to PayPal
+                    {paypalLabel}
                   </a>
                 </div>
               )}
 
-              {/* ── ACH / BANK TRANSFER ── */}
+              {/* ACH */}
               {method === 'ach' && (
                 <div className="method-panel">
-                  <div className="method-notice info">
-                    <FiDollarSign />
-                    <div>
-                      <strong>Bank Transfer / ACH</strong>
-                      <p>
-                        To accept ACH/bank transfers, connect <strong>Stripe</strong> (supports
-                        ACH Debit) or <strong>Plaid</strong>. Alternatively, provide your
-                        church's bank routing + account number below for manual wire transfers.
-                        Contact your bank or Stripe dashboard to enable ACH.
-                      </p>
-                    </div>
-                  </div>
                   <div className="bank-info-box">
                     <p><strong>Bank Transfer Details</strong></p>
                     <p>Payable To: <strong>Cobb Church Network</strong></p>
-                    <p>Contact <a href="mailto:info@cobbchurchnetwork.org">info@cobbchurchnetwork.org</a> for routing & account details.</p>
+                    <p>Contact <a href="mailto:info@cobbchurchnetwork.org">info@cobbchurchnetwork.org</a> for routing and account details.</p>
                   </div>
                 </div>
               )}
 
-              {/* ── CHECK ── */}
+              {/* CHECK */}
               {method === 'check' && (
                 <div className="method-panel">
                   <div className="check-box">
@@ -236,8 +216,7 @@ const Donate = () => {
                       Cobb County, Georgia
                     </p>
                     <p className="check-note">
-                      Please include your name and email address on the memo line so we
-                      can send you a receipt.
+                      Please include your name and email on the memo line so we can send you a receipt.
                     </p>
                   </div>
                 </div>

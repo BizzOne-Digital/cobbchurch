@@ -61,6 +61,7 @@
   opacity: 0.9;
 }
 
+
 .hero-eyebrow {
   color: rgba(255, 255, 255, 0.85);
   font-family: 'Montserrat', sans-serif;
@@ -96,10 +97,14 @@
 .hero-subtitle {
   color: rgba(255, 255, 255, 0.95);
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
   font-weight: 500;
-  margin-bottom: 14px;
   font-style: italic;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 14px;
+  white-space: nowrap;
+  display: block;
 }
 
 .hero-divider {
@@ -808,6 +813,40 @@
   white-space: nowrap;
 }
 
+.vision-card {
+  background: rgba(7, 23, 47, 0.15);
+  border: 2px solid rgba(7, 23, 47, 0.4);
+  border-radius: 10px;
+  padding: 28px 16px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.vision-card:hover {
+  transform: translateY(-4px);
+  background: rgba(7, 23, 47, 0.25);
+}
+
+.vision-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #07172f;
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.vision-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #07172f;
+  line-height: 1.5;
+  display: block;
+}
 .btn-lg {
   height: 52px;
   padding: 0 32px;
@@ -958,21 +997,27 @@
   }
 
   /* PDF: Mobile hero — show more of image, group visible */
-  .home-hero {
+   .home-hero {
     padding-top: 80px;
     padding-bottom: 48px;
     min-height: 100vh;
-    background-position: center center !important;
+    background-position: 30% center !important; /* center top se change kiya */
     background-size: cover !important;
   }
 
   .hero-title {
     font-size: 2.2rem;
   }
+  
+  
 
+  
   .hero-subtitle {
-    font-size: 0.95rem;
+    white-space: normal; /* mobile pe break allow */
+    padding: 0 16px;
+    line-height: 1.6;
   }
+
 
   .hero-description {
     font-size: 0.9rem;
