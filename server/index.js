@@ -9,6 +9,9 @@ require('dotenv').config();
 
 const app = express();
 
+// Vercel ke liye trust proxy (rate-limit fix)
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 
@@ -56,33 +59,43 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/donate', require('./routes/donate'));
 app.use('/api/admin', require('./routes/admin'));
 
-// MongoDB Connection
+// MongoDB Connection with reconnect handling
 let isConnected = false;
 
 const connectDB = async () => {
-  if (isConnected) return;
+  if (isConnected && mongoose.connection.readyState === 1) return;
+
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 10,
+      minPoolSize: 2,
     });
     isConnected = true;
     console.log('✅ MongoDB connected');
     require('./utils/seedAdmin');
   } catch (err) {
+    isConnected = false;
     console.error('MongoDB connection error:', err);
   }
 };
 
 connectDB();
 
-// Mongo Events
 mongoose.connection.on('connected', () => {
+  isConnected = true;
   console.log('MongoDB Connected');
 });
 
+mongoose.connection.on('disconnected', () => {
+  isConnected = false;
+  console.log('MongoDB Disconnected — reconnecting...');
+  setTimeout(connectDB, 3000);
+});
+
 mongoose.connection.on('error', (err) => {
+  isConnected = false;
   console.log('MongoDB Error:', err);
 });
 
