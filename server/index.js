@@ -9,9 +9,6 @@ require('dotenv').config();
 
 const app = express();
 
-// Vercel ke liye trust proxy (rate-limit fix)
-app.set('trust proxy', 1);
-
 // Security middleware
 app.use(helmet());
 
@@ -66,6 +63,8 @@ const connectDB = async () => {
   if (isConnected) return;
   try {
     await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 10000,
     });
     isConnected = true;
@@ -78,6 +77,7 @@ const connectDB = async () => {
 
 connectDB();
 
+// Mongo Events
 mongoose.connection.on('connected', () => {
   console.log('MongoDB Connected');
 });
