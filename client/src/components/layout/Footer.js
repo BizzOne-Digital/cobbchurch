@@ -62,7 +62,7 @@ const Footer = () => {
 
           <div className="footer-col">
             <h4>Stay Connected</h4>
-            <p>Follow us for updates, events, and ways to get involved.</p>
+            <p>Follow us for updates, events, and ways to get involved..</p>
             <form className="footer-newsletter" onSubmit={e => e.preventDefault()}>
               <input type="email" placeholder="Your email address" />
               <button type="submit" className="btn btn-primary btn-sm">→</button>
