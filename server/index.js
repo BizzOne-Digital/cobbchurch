@@ -9,14 +9,29 @@ require('dotenv').config();
 
 const app = express();
 
-// Vercel ke liye trust proxy (rate-limit fix)
+// Vercel ke liye trust proxy
 app.set('trust proxy', 1);
 
 // Security middleware
 app.use(helmet());
 
+// CORS — www aur non-www dono allow
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://cobbchurchnetwork.org',
+  'https://www.cobbchurchnetwork.org',
+  'https://cobbchurch.vercel.app',
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
@@ -42,10 +57,7 @@ app.get('/', (req, res) => {
 
 // Health Check
 app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    timestamp: new Date().toISOString()
-  });
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // API Routes
@@ -59,12 +71,11 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/donate', require('./routes/donate'));
 app.use('/api/admin', require('./routes/admin'));
 
-// MongoDB Connection with reconnect handling
+// MongoDB Connection
 let isConnected = false;
 
 const connectDB = async () => {
   if (isConnected && mongoose.connection.readyState === 1) return;
-
   try {
     await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 30000,
@@ -83,17 +94,12 @@ const connectDB = async () => {
 
 connectDB();
 
-mongoose.connection.on('connected', () => {
-  isConnected = true;
-  console.log('MongoDB Connected');
-});
-
+mongoose.connection.on('connected', () => { isConnected = true; });
 mongoose.connection.on('disconnected', () => {
   isConnected = false;
   console.log('MongoDB Disconnected — reconnecting...');
   setTimeout(connectDB, 3000);
 });
-
 mongoose.connection.on('error', (err) => {
   isConnected = false;
   console.log('MongoDB Error:', err);
